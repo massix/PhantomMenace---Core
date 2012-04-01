@@ -17,8 +17,6 @@ int main(int argc, char *argv[])
 	PhantomMenace::ParsingEnvironment pe;
 	if (pe.parseFromFile(grammarFile))
 	{
-		pe.logElements();
-
 		std::cout << "Is grammar loaded? ";
 		if (pe.isGrammarLoaded())
 		{
