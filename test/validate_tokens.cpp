@@ -17,23 +17,21 @@ int main(int argc, char *argv[])
 	PhantomMenace::ParsingEnvironment pe;
 	if (pe.parseFromFile(grammarFile))
 	{
-		const ElementVector_t& tokens = pe.getElements();
+		PhantomMenace::TokenElement elem = pe.getElements()[0];
 
-		PhantomMenace::TokenElement elem = tokens[0];
-
-		if (tokens[0].getElementName() != "SerialCode")
+		if (elem.getElementName() != "SerialCode")
 			exit(EXIT_FAILURE);
 
-		if (tokens[0].getElementFormat() != "000-000-000")
+		if (elem.getElementFormat() != "000-000-000")
 			exit(EXIT_FAILURE);
 
-		if (tokens[0].getPreSeparator() != ' ')
+		if (elem.getPreSeparator() != ' ')
 			exit(EXIT_FAILURE);
 
-		if (tokens[0].isPreSeparatorMandatory() != false)
+		if (elem.isPreSeparatorMandatory() != false)
 			exit(EXIT_FAILURE);
 
-		if (tokens[0].isPreSeparatorMultiple() != true)
+		if (elem.isPreSeparatorMultiple() != true)
 			exit(EXIT_FAILURE);
 
 		exit(EXIT_SUCCESS);
