@@ -15,6 +15,7 @@ const char *grammarFile = "../../test/GrammarExample.ini";
 int main(int argc, char *argv[])
 {
 	PhantomMenace::ParsingEnvironment pe;
+	pe.setLogFile("./print_log.log");
 	if (pe.parseFromFile(grammarFile))
 	{
 		pe.logElements();

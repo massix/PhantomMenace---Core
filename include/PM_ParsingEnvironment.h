@@ -15,6 +15,7 @@
 #include "PM_IP_Parser.h"
 
 #include <vector>
+#include <cstdlib>
 
 typedef std::vector<PhantomMenace::TokenElement> ElementVector_t;
 
@@ -36,6 +37,9 @@ public:
 
 	void logElements() const;
 
+	bool setLogFile(const std::string& iFilePath);
+	void setLogFile(FILE *iFileFd);
+
 private:
 	PhantomMenace::GrammarElement* grammar;
 	ElementVector_t elements;
@@ -45,6 +49,8 @@ private:
 	void buildElementsVector();
 
 	bool valid;
+
+	FILE *aLogFile;
 };
 
 } /* namespace PhantomMenace */

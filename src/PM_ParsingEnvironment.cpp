@@ -11,13 +11,19 @@
 #include "PM_IP_IniElement.h"
 
 #include <iostream>
+#include <cstdlib>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
+
+#define flog(x...) fprintf(aLogFile, x)
 
 namespace PhantomMenace {
 
 ParsingEnvironment::ParsingEnvironment() :
-		grammar(0), parser(IniParser::Parser::getInstancePtr()), valid(false)
+		grammar(0),
+		parser(IniParser::Parser::getInstancePtr()),
+		valid(false),
+		aLogFile(stdout)
 {
 
 }
@@ -89,28 +95,29 @@ const ElementVector_t& ParsingEnvironment::getElements() const
 
 void ParsingEnvironment::logElements() const
 {
-	std::cout << "====[ PARSER LOG STARTING ]====\n";
-
+	flog("====[ PARSER LOG STARTING ]====\n");
 	// Log the grammar
-	std::cout << "GRAMMAR ELEMENT:\n";
-	std::cout << "    NAME  : \"" << grammar->getElementName() << "\"\n";
-	std::cout << "    AUTHOR: \"" << (*grammar).getAuthor() << "\"\n";
-	std::cout << "    EMAIL : \"" << grammar->getAuthorEmail() << "\"\n";
-	std::cout << "    DATE  : \"" << grammar->getCreationDate() << "\"\n";
+	flog("GRAMMAR ELEMENT:\n");
+	flog("    NAME  : \"%s\"\n", grammar->getElementName().c_str());
+	flog("    AUTHOR: \"%s\"\n", grammar->getAuthor().c_str());
+	flog("    EMAIL : \"%s\"\n", grammar->getAuthorEmail().c_str());
+	flog("    DATE  : \"%s\"\n", grammar->getCreationDate().c_str());
 
 	// Log the tokens
 	ElementVector_t::const_iterator ite;
 	for (ite = this->elements.begin(); ite != this->elements.end(); ++ite)
 	{
-		std::cout << "TOKEN ELEMENT:\n";
-		std::cout << "    NAME        : \"" << ite->getElementName() << "\"\n";
-		std::cout << "    PRESEPARATOR: \"" << ite->getPreSeparator() << "\"\n";
-		std::cout << "       MANDATORY: \"" << ite->isPreSeparatorMandatory() << "\"\n";
-		std::cout << "       MULTIPLE : \"" << ite->isPreSeparatorMultiple() << "\"\n";
-		std::cout << "    FORMAT      : \"" << ite->getElementFormat() << "\"\n";
+		flog("TOKEN ELEMENT:\n");
+		flog("    NAME        : \"%s\"\n", ite->getElementName().c_str());
+		flog("    PRESEPARATOR: \"%c\"\n", ite->getPreSeparator());
+		flog("       MANDATORY: \"%s\"\n", ite->isPreSeparatorMandatory()?
+				"Yes" : "No");
+		flog("       MULTIPLE : \"%s\"\n", ite->isPreSeparatorMultiple()?
+				"Yes" : "No");
+		flog("    FORMAT      : \"%s\"\n", ite->getElementFormat().c_str());
 	}
 
-	std::cout << "====[ PARSER LOG FINISHED ]====\n";
+	flog("====[ PARSER LOG FINISHED ]====\n");
 }
 
 void ParsingEnvironment::buildElementsVector()
@@ -145,6 +152,23 @@ void ParsingEnvironment::buildElementsVector()
 			this->elements.push_back(token);
 		}
 	}
+}
+
+bool ParsingEnvironment::setLogFile(const std::string& iFilePath)
+{
+	aLogFile = fopen(iFilePath.c_str(), "w+");
+	if (!aLogFile)
+	{
+		aLogFile = stdout;
+		return false;
+	}
+
+	return true;
+}
+
+void ParsingEnvironment::setLogFile(FILE *iFileFd)
+{
+	aLogFile = iFileFd;
 }
 
 } /* namespace PhantomMenace */
