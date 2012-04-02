@@ -26,6 +26,7 @@ public:
 	const char getPreSeparator() const;
 	const bool isPreSeparatorMandatory() const;
 	const bool isPreSeparatorMultiple() const;
+	bool shouldPreSeparatorBeEscaped() const;
 
 	const std::string& getElementFormat() const;
 

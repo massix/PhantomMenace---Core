@@ -45,4 +45,17 @@ const std::string& TokenElement::getElementFormat() const
 {
 	return anElementFormat;
 }
+
+bool TokenElement::shouldPreSeparatorBeEscaped() const
+{
+	return (
+		aPreSeparator == '|' ||
+		aPreSeparator == '[' ||
+		aPreSeparator == ']' ||
+		aPreSeparator == '+' ||
+		aPreSeparator == '*' ||
+		aPreSeparator == '\\' ||
+		aPreSeparator == '(' ||
+		aPreSeparator == ')');
+}
 } /* namespace PhantomMenace */

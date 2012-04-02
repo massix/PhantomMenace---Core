@@ -8,7 +8,7 @@ file(GLOB HEADERS ../include/*.h)
 add_definitions(-Wall -dynamiclib)
 
 link_directories(${PROJECT_BIN_DIRECTORY} /usr/local/include)
-link_libraries(PmIniParser)
+link_libraries(PmIniParser boost_regex-mt)
 
 add_library(PhantomMenace SHARED ${SOURCES})
 add_library(PhantomMenace-static STATIC ${SOURCES})

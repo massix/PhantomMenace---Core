@@ -7,6 +7,7 @@
 
 #include "PM_ParsingEnvironment.h"
 #include "PM_GrammarElement.h"
+#include "PM_Validator.h"
 #include <iostream>
 #include <cstdlib>
 
@@ -18,7 +19,14 @@ int main(int argc, char *argv[])
 	pe.setLogFile("./print_log.log");
 	if (pe.parseFromFile(grammarFile))
 	{
-		pe.logElements();
+		try
+		{
+			pe.logElements();
+		}
+		catch (...)
+		{
+			std::cerr << "Got exception\n";
+		}
 	}
 
 	exit(EXIT_FAILURE);
