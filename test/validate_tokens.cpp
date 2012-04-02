@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	PhantomMenace::ParsingEnvironment pe;
 	if (pe.parseFromFile(grammarFile))
 	{
-		PhantomMenace::TokenElement elem = pe.getElements()[0];
+		PhantomMenace::TokenElement elem = pe.getElements()[1];
 
 		if (elem.getElementName() != "SerialCode")
 			exit(EXIT_FAILURE);
@@ -25,13 +25,13 @@ int main(int argc, char *argv[])
 		if (elem.getElementFormat() != "000-000-000")
 			exit(EXIT_FAILURE);
 
-		if (elem.getPreSeparator() != ' ')
+		if (elem.getPreSeparator() != '/')
 			exit(EXIT_FAILURE);
 
-		if (elem.isPreSeparatorMandatory() != false)
+		if (elem.isPreSeparatorMandatory() != true)
 			exit(EXIT_FAILURE);
 
-		if (elem.isPreSeparatorMultiple() != true)
+		if (elem.isPreSeparatorMultiple() != false)
 			exit(EXIT_FAILURE);
 
 		exit(EXIT_SUCCESS);
