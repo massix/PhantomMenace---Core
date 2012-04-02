@@ -58,4 +58,14 @@ bool TokenElement::shouldPreSeparatorBeEscaped() const
 		aPreSeparator == '(' ||
 		aPreSeparator == ')');
 }
+
+void TokenElement::setElementValue(const std::string& iValue)
+{
+	anElementValue = iValue;
+}
+
+const std::string& TokenElement::getElementValue() const
+{
+	return anElementValue;
+}
 } /* namespace PhantomMenace */

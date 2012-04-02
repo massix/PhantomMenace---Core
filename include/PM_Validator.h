@@ -22,14 +22,14 @@ namespace PhantomMenace
 class Validator
 {
 public:
-	Validator(const ParsingEnvironment& iEnvironment)
+	Validator(ParsingEnvironment& iEnvironment)
 		throw (std::runtime_error);
 	virtual ~Validator();
 
 	bool validateString(const std::string& iString);
 
 private:
-	const ParsingEnvironment& anEnvironment;
+	ParsingEnvironment& anEnvironment;
 	StringVector_t aVectorValidatedStrings;
 
 protected:

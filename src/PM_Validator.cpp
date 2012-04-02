@@ -20,7 +20,7 @@
 namespace PhantomMenace
 {
 
-Validator::Validator(const ParsingEnvironment& iEnvironment)
+Validator::Validator(ParsingEnvironment& iEnvironment)
 	throw (std::runtime_error)
 	: anEnvironment(iEnvironment)
 {
@@ -87,7 +87,9 @@ bool Validator::validateString(const std::string& iString)
 			break;
 		}
 
+		extendedFormat += "(";
 		extendedFormat += (*ite).getElementFormat();
+		extendedFormat += ")";
 	}
 
 	extendedFormat += "$";
@@ -101,8 +103,18 @@ bool Validator::validateString(const std::string& iString)
 
 	try
 	{
-		boost::regex re(extendedFormat);
-		return boost::regex_match(iString, re);
+		boost::regex regex(extendedFormat);
+		boost::cmatch cmatch;
+		if (boost::regex_match(iString, regex))
+		{
+			boost::regex_match(iString.data(), cmatch, regex);
+			for (size_t i = 1; i < cmatch.size(); i++)
+				anEnvironment.setValueForElement(i-1, cmatch[i]);
+
+			return true;
+		}
+
+		return false;
 	}
 	catch (boost::regex_error& e)
 	{

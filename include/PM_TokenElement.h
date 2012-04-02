@@ -30,13 +30,18 @@ public:
 
 	const std::string& getElementFormat() const;
 
+	const std::string& getElementValue() const;
+
 private:
 	char aPreSeparator;
 	bool aPreSeparatorMandatory;
 	bool aPreSeparatorMultiple;
 
 	std::string anElementFormat;
+	std::string anElementValue;
 
+protected:
+	void setElementValue(const std::string& iValue);
 };
 
 } /* namespace PhantomMenace */

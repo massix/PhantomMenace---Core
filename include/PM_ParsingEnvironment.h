@@ -40,6 +40,10 @@ public:
 	bool setLogFile(const std::string& iFilePath);
 	void setLogFile(FILE *iFileFd);
 
+	void setValueForElement(int index, const std::string& iElementValue);
+
+	const TokenElement& operator[](const std::string& iElementName);
+
 private:
 	PhantomMenace::GrammarElement* grammar;
 	ElementVector_t elements;

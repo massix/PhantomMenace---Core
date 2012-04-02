@@ -12,6 +12,8 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <exception>
+#include <stdexcept>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 
@@ -169,6 +171,31 @@ bool ParsingEnvironment::setLogFile(const std::string& iFilePath)
 void ParsingEnvironment::setLogFile(FILE *iFileFd)
 {
 	aLogFile = iFileFd;
+}
+
+void ParsingEnvironment::setValueForElement(int index,
+		const std::string& iElementValue)
+{
+	try
+	{
+		elements[index].anElementValue = iElementValue;
+	}
+	catch(...)
+	{
+		/* Do nothing */
+	}
+}
+
+const TokenElement& ParsingEnvironment::operator [](const std::string& iElementName)
+{
+	ElementVector_t::const_iterator ite;
+	for (ite = elements.begin(); ite != elements.end(); ++ite)
+	{
+		if ((*ite).getElementName() == iElementName)
+			return (*ite);
+	}
+
+	throw std::runtime_error("Element not found");
 }
 
 } /* namespace PhantomMenace */
