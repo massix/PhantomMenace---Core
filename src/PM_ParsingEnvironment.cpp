@@ -27,7 +27,7 @@ ParsingEnvironment::ParsingEnvironment() :
 		valid(false),
 		aLogFile(stdout)
 {
-
+	IniParser::Parser::clearInstance();
 }
 
 ParsingEnvironment::~ParsingEnvironment()
