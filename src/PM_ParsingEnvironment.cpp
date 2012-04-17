@@ -27,7 +27,6 @@ ParsingEnvironment::ParsingEnvironment() :
 		valid(false),
 		aLogFile(stdout)
 {
-	IniParser::Parser::clearInstance();
 }
 
 ParsingEnvironment::~ParsingEnvironment()
@@ -50,12 +49,14 @@ bool ParsingEnvironment::isGrammarLoaded() const
 
 bool ParsingEnvironment::parse(const std::string& input)
 {
+	IniParser::Parser::clearInstance();
 	parser->parse(input.c_str());
 	return validate();
 }
 
 bool ParsingEnvironment::parseFromFile(const std::string& iFileName)
 {
+	IniParser::Parser::clearInstance();
 	parser->parseFromFile(iFileName);
 	return validate();
 }
