@@ -8,10 +8,11 @@ file(GLOB HEADERS ../include/*.h)
 add_definitions(-Wall -dynamiclib)
 
 link_directories(${PROJECT_BIN_DIRECTORY} /usr/local/include)
-link_libraries(PmIniParser boost_regex-mt)
 
 add_library(PhantomMenace SHARED ${SOURCES})
 add_library(PhantomMenace-static STATIC ${SOURCES})
+target_link_libraries(PhantomMenace PmIniParser boost_regex-mt)
+target_link_libraries(PhantomMenace-static PmIniParser boost_regex-mt)
 
 # Set the version of the library
 set_target_properties(PhantomMenace PhantomMenace-static
