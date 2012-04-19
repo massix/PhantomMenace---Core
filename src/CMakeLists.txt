@@ -13,6 +13,10 @@ link_libraries(PmIniParser boost_regex-mt)
 add_library(PhantomMenace SHARED ${SOURCES})
 add_library(PhantomMenace-static STATIC ${SOURCES})
 
+# Set the version of the library
+set_target_properties(PhantomMenace PhantomMenace-static
+    PROPERTIES SOVERSION 1 VERSION 1.1.21)
+
 install(TARGETS PhantomMenace LIBRARY DESTINATION lib)
 install(TARGETS PhantomMenace-static ARCHIVE DESTINATION lib)
 install(FILES ${HEADERS} DESTINATION include)
