@@ -40,7 +40,7 @@ namespace PhantomMenace {
 
 ParsingEnvironment::ParsingEnvironment() :
 		grammar(0),
-		parser(IniParser::Parser::getInstancePtr()),
+		parser(IniParser::Parser::getInstance()),
 		valid(false),
 		aLogFile(stdout)
 {
@@ -67,23 +67,23 @@ bool ParsingEnvironment::isGrammarLoaded() const
 bool ParsingEnvironment::parse(const std::string& input)
 {
 	IniParser::Parser::clearInstance();
-	parser->parse(input.c_str());
+	parser.parse(input.c_str());
 	return validate();
 }
 
 bool ParsingEnvironment::parseFromFile(const std::string& iFileName)
 {
 	IniParser::Parser::clearInstance();
-	parser->parseFromFile(iFileName);
+	parser.parseFromFile(iFileName);
 	return validate();
 }
 
 bool ParsingEnvironment::validate()
 {
-	if (parser->hasElement("grammar"))
+	if (parser.hasElement("grammar"))
 	{
 		const IniParser::IniElement& elem =
-				parser->getElement("grammar");
+				parser.getElement("grammar");
 
 		grammar = new GrammarElement(
 				elem["grammar.name"],
@@ -142,7 +142,7 @@ void ParsingEnvironment::logElements() const
 
 void ParsingEnvironment::buildElementsVector()
 {
-	const Elements_t& elements = parser->getElements();
+	const Elements_t& elements = parser.getElements();
 
 	Elements_t::const_iterator ite;
 	for (ite = elements.begin(); ite != elements.end(); ++ite)

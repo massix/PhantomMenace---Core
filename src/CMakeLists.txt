@@ -16,7 +16,7 @@ target_link_libraries(PhantomMenace-static PmIniParser boost_regex-mt)
 
 # Set the version of the library
 set_target_properties(PhantomMenace PhantomMenace-static
-    PROPERTIES SOVERSION 1 VERSION 1.1.21)
+    PROPERTIES SOVERSION 1 VERSION 1.1.22)
 
 install(TARGETS PhantomMenace LIBRARY DESTINATION lib)
 install(TARGETS PhantomMenace-static ARCHIVE DESTINATION lib)

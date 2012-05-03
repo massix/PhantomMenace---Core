@@ -64,7 +64,7 @@ public:
 private:
 	PhantomMenace::GrammarElement* grammar;
 	ElementVector_t elements;
-	PhantomMenace::IniParser::Parser *parser;
+	PhantomMenace::IniParser::Parser& parser;
 
 	bool validate();
 	void buildElementsVector();
