@@ -1,7 +1,5 @@
 # src folder
 
-include_directories(. ../include /usr/local/include)
-
 file(GLOB SOURCES *.cpp)
 file(GLOB HEADERS ../include/*.h)
 
