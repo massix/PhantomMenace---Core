@@ -20,7 +20,7 @@ target_link_libraries(PhantomMenace-static ${PmIniParser_LIBRARY} ${Boost_LIBRAR
 
 # Set the version of the library
 set_target_properties(PhantomMenace PhantomMenace-static
-    PROPERTIES SOVERSION 1 VERSION 1.1.22)
+    PROPERTIES SOVERSION 1 VERSION 1.1.23)
 
 # Build the static library with the same name
 set_target_properties(PhantomMenace-static

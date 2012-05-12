@@ -31,6 +31,9 @@
 #include <cstdlib>
 #include <exception>
 #include <stdexcept>
+
+/* Boost stuff */
+#include <boost/shared_ptr.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 
@@ -39,7 +42,6 @@
 namespace PhantomMenace {
 
 ParsingEnvironment::ParsingEnvironment() :
-		grammar(0),
 		parser(IniParser::Parser::getInstance()),
 		valid(false),
 		aLogFile(stdout)
@@ -48,9 +50,6 @@ ParsingEnvironment::ParsingEnvironment() :
 
 ParsingEnvironment::~ParsingEnvironment()
 {
-	if (grammar)
-		delete grammar;
-
 	IniParser::Parser::resetInstance();
 }
 
@@ -61,7 +60,7 @@ bool ParsingEnvironment::isEnvironmentValid() const
 
 bool ParsingEnvironment::isGrammarLoaded() const
 {
-	return !(grammar == 0);
+	return (grammar.get() != 0);
 }
 
 bool ParsingEnvironment::parse(const std::string& input)
@@ -85,14 +84,14 @@ bool ParsingEnvironment::validate()
 		const IniParser::IniElement& elem =
 				parser.getElement("grammar");
 
-		grammar = new GrammarElement(
+		grammar = boost::shared_ptr<GrammarElement>(new GrammarElement(
 				elem["grammar.name"],
 				elem.hasAttribute("grammar.author")?
 						elem["grammar.author"]: "",
 				elem.hasAttribute("grammar.author.email")?
 						elem["grammar.author.email"]: "",
 				elem.hasAttribute("grammar.creationDate")?
-						elem["grammar.creationDate"]: "");
+						elem["grammar.creationDate"]: ""));
 		valid = true;
 
 		buildElementsVector();
@@ -105,7 +104,7 @@ bool ParsingEnvironment::validate()
 
 const GrammarElement& ParsingEnvironment::getGrammar() const
 {
-	return (*grammar);
+	return (*(grammar.get()));
 }
 
 const ElementVector_t& ParsingEnvironment::getElements() const

@@ -33,6 +33,7 @@
 
 #include <vector>
 #include <cstdlib>
+#include <boost/shared_ptr.hpp>
 
 typedef std::vector<PhantomMenace::TokenElement> ElementVector_t;
 
@@ -62,7 +63,7 @@ public:
 	const TokenElement& operator[](const std::string& iElementName);
 
 private:
-	PhantomMenace::GrammarElement* grammar;
+	boost::shared_ptr<PhantomMenace::GrammarElement> grammar;
 	ElementVector_t elements;
 	PhantomMenace::IniParser::Parser& parser;
 
