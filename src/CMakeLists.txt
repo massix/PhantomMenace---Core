@@ -3,14 +3,26 @@
 file(GLOB SOURCES *.cpp)
 file(GLOB HEADERS ../include/*.h)
 
-add_definitions(-Wall -dynamiclib)
+set(MajorVersion  1)
+set(BinaryVersion 1)
+set(MinorVersion  24)
+set(FullVersion ${MajorVersion}.${BinaryVersion}.${MinorVersion})
+
+add_definitions(
+    -Wall
+    -DMAJORVERSION=${MajorVersion}
+    -DBINARYVERSION=${BinaryVersion}
+    -DMINORVERSION=${MinorVersion})
 
 link_directories(${PROJECT_BIN_DIRECTORY})
 
 find_package(Boost REQUIRED COMPONENTS regex-mt)
 find_package(PmIniParser REQUIRED)
 
-include_directories(${PmIniParser_INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
+include_directories(
+    ${PhantomMenace_SOURCE_DIR}/include
+    ${PmIniParser_INCLUDE_DIR} 
+    ${Boost_INCLUDE_DIRS})
 add_library(PhantomMenace SHARED ${SOURCES})
 add_library(PhantomMenace-static STATIC ${SOURCES})
 target_link_libraries(PhantomMenace ${PmIniParser_LIBRARY} ${Boost_LIBRARIES})
