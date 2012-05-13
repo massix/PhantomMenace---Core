@@ -117,7 +117,7 @@ const ElementVector_t& ParsingEnvironment::getElements() const
 void ParsingEnvironment::logElements() const
 {
 	flog("====[ PARSER LOG STARTING   ]====\n");
-	flog("====[ USING INIPARSER %s ]====", IniParser::library_version());
+	flog("====[ USING INIPARSER %s ]====\n\n", IniParser::library_version());
 
 	// Log the grammar
 	flog("GRAMMAR ELEMENT:\n");
@@ -140,7 +140,7 @@ void ParsingEnvironment::logElements() const
 		flog("    FORMAT      : \"%s\"\n", ite->getElementFormat().c_str());
 	}
 
-	flog("====[ PARSER LOG FINISHED ]====\n");
+	flog("====[ PARSER LOG FINISHED ]====\n\n\n\n\n");
 }
 
 void ParsingEnvironment::buildElementsVector()
@@ -179,7 +179,7 @@ void ParsingEnvironment::buildElementsVector()
 
 bool ParsingEnvironment::setLogFile(const std::string& iFilePath)
 {
-	aLogFile = fopen(iFilePath.c_str(), "w+");
+	aLogFile = fopen(iFilePath.c_str(), "a+");
 	if (!aLogFile)
 	{
 		aLogFile = stdout;

@@ -5,7 +5,7 @@ file(GLOB HEADERS ../include/*.h)
 
 set(MajorVersion  1)
 set(BinaryVersion 1)
-set(MinorVersion  24)
+set(MinorVersion  25)
 set(FullVersion ${MajorVersion}.${BinaryVersion}.${MinorVersion})
 
 add_definitions(
