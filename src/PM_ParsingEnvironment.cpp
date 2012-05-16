@@ -24,6 +24,7 @@
 
 #include "PM_ParsingEnvironment.h"
 #include "PM_TokenElement.h"
+#include "PM_StaticFunctions.h"
 
 #include <PM_IP_Parser.h>
 #include <PM_IP_IniElement.h>
@@ -116,7 +117,7 @@ const ElementVector_t& ParsingEnvironment::getElements() const
 
 void ParsingEnvironment::logElements() const
 {
-	flog("====[ PARSER LOG STARTING   ]====\n");
+	flog("====[ PARSER LOG STARTING %s ]====\n", Util::getLibraryVersion());
 	flog("====[ USING INIPARSER %s ]====\n\n", IniParser::library_version());
 
 	// Log the grammar
