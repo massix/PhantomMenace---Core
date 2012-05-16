@@ -5,7 +5,7 @@ file(GLOB HEADERS ../include/*.h)
 
 set(MajorVersion  1)
 set(BinaryVersion 1)
-set(MinorVersion  25)
+set(MinorVersion  26)
 set(FullVersion ${MajorVersion}.${BinaryVersion}.${MinorVersion})
 
 add_definitions(
@@ -30,7 +30,7 @@ target_link_libraries(PhantomMenace-static ${PmIniParser_LIBRARY} ${Boost_LIBRAR
 
 # Set the version of the library
 set_target_properties(PhantomMenace PhantomMenace-static
-    PROPERTIES SOVERSION 1 VERSION 1.1.23)
+    PROPERTIES SOVERSION 1 VERSION ${FullVersion})
 
 # Build the static library with the same name
 set_target_properties(PhantomMenace-static

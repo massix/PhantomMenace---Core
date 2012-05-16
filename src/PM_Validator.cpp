@@ -73,36 +73,37 @@ bool Validator::validateString(const std::string& iString)
 
 		extendedFormat += static_cast<char>((*ite).getPreSeparator());
 
-		switch ((*ite).isPreSeparatorMandatory())
+		if ((*ite).isPreSeparatorMandatory())
 		{
-		case true:
-			switch ((*ite).isPreSeparatorMultiple())
-			{
 			/* Preseparator is mandatory and multiple, the preseparator
 			 * regex should look like "pp*?"
 			 */
-			case true:
+			if ((*ite).isPreSeparatorMultiple())
+			{
 				if ((*ite).shouldPreSeparatorBeEscaped())
-							extendedFormat += '\\';
+					extendedFormat += '\\';
+
 				extendedFormat += static_cast<char>((*ite).getPreSeparator());
 				extendedFormat += "*?";
-				break;
-				/* Preseparator is mandatory but not multiple, the preseparator
-				 * regex should look like "p?"
-				 */
-			case false:
-				extendedFormat += "?";
-				break;
 			}
-			break;
-			/* Preseparator is NOT mandatory but could be multiple
-			 * regex should look like "p*?" (we honestly don't care)
-			 */
-		case false:
-			extendedFormat += "*?";
 
-			break;
+			/* Preseparator is mandatory but not multiple, the preseparator
+			 * regex should look like "p?"
+			 */
+			else
+			{
+				extendedFormat += "?";
+			}
 		}
+
+		/* Preseparator is NOT mandatory but could be multiple
+		 * regex should look like "p*?" (we honestly don't care)
+		 */
+		else
+		{
+			extendedFormat += "*?";
+		}
+
 
 		extendedFormat += "(";
 		extendedFormat += (*ite).getElementFormat();
