@@ -118,7 +118,8 @@ const ElementVector_t& ParsingEnvironment::getElements() const
 void ParsingEnvironment::logElements() const
 {
 	flog("====[ PARSER LOG STARTING %s ]====\n", Util::getLibraryVersion());
-	flog("====[ USING INIPARSER %s ]====\n\n", IniParser::library_version());
+	flog("====[ USING INIPARSER %s ]====\n", IniParser::library_version());
+	flog("====[ INIPARSER TOOK %f SECONDS ]====\n\n", parser.getParsingDuration());
 
 	// Log the grammar
 	flog("GRAMMAR ELEMENT:\n");

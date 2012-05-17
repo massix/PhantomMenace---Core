@@ -4,8 +4,8 @@ file(GLOB SOURCES *.cpp)
 file(GLOB HEADERS ../include/*.h)
 
 set(MajorVersion  1)
-set(BinaryVersion 1)
-set(MinorVersion  27)
+set(BinaryVersion 2)
+set(MinorVersion  0)
 set(FullVersion ${MajorVersion}.${BinaryVersion}.${MinorVersion})
 
 add_definitions(
@@ -16,7 +16,7 @@ add_definitions(
 
 link_directories(${PROJECT_BIN_DIRECTORY})
 
-find_package(Boost REQUIRED COMPONENTS regex-mt)
+find_package(Boost REQUIRED COMPONENTS regex system)
 find_package(PmIniParser REQUIRED)
 
 include_directories(
