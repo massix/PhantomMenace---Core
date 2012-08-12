@@ -134,7 +134,7 @@ bool Validator::validateString(const std::string& iString)
 
 		return false;
 	}
-	catch (boost::regex_error& e)
+	catch (const boost::regex_error& e)
 	{
 		std::cerr << "Got boost::regex_error -> " << e.what() << std::endl;
 	}
